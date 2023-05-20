@@ -1,0 +1,112 @@
+import { useTable } from "react-table";
+import moment from "moment";
+import AdminCalendarCell from "@/Pages/AdminCalendarCell";
+import React from "react";
+
+const AdminCalendar = (props) => {
+    const { carender_elements } = props;
+
+    const weekdays = carender_elements.japaneseWeekdays;
+    const datesOfWeek = carender_elements.datesOfWeek;
+    const times = carender_elements.times;
+
+    const columns = [
+        { Header: "日時", accessor: "time" },
+        ...datesOfWeek.map((date) => {
+            const MomentDate = moment(date.date);
+            const header = `${MomentDate.format("M/D")}(${
+                weekdays[MomentDate.format("d")]
+            })`;
+            const currents = MomentDate.format("YYYY-MM-DD");
+            return {
+                Header: header,
+                accessor: currents,
+            };
+        }),
+    ];
+
+    const data = [
+        ...times.map((eachtime) => {
+            const time = eachtime;
+            return {
+                time: time,
+                ...datesOfWeek.reduce((obj, dateOfWeek, i) => {
+                    const date = dateOfWeek.date;
+                    const dateStr = moment(date).format("YYYY-MM-DD");
+                    obj[dateStr] = (
+                        <AdminCalendarCell
+                            columnNum={i + 1}
+                            date={dateStr}
+                            time={time}
+                        />
+                    );
+                    return obj;
+                }, {}),
+            };
+        }),
+    ];
+    function Table({ columns, data }) {
+        // Use the state and functions returned from useTable to build your UI
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            rows,
+            prepareRow,
+        } = useTable({
+            columns,
+            data,
+        });
+
+        return (
+            <table {...getTableProps()}>
+                <thead>
+                    {headerGroups.map((headerGroup) => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map((column) => (
+                                <th {...column.getHeaderProps()}>
+                                    {column.render("Header")}
+                                </th>
+                            ))}
+                        </tr>
+                    ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {rows.map((row, i) => {
+                        prepareRow(row);
+                        return (
+                            <tr {...row.getRowProps()}>
+                                {row.cells.map((cell) => {
+                                    return (
+                                        <td {...cell.getCellProps()}>
+                                            {cell.render("Cell")}
+                                        </td>
+                                    );
+                                })}
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        );
+    }
+    return (
+        <div className="flex justify-center items-center">
+            <Table columns={columns} data={data} />
+            <style>
+                {`
+        table {
+          border-collapse: collapse;
+        }
+        
+        th,
+        td {
+          border: 1px solid black;
+          padding: 0.5rem;
+        }
+        `}
+            </style>
+        </div>
+    );
+};
+export default AdminCalendar;
