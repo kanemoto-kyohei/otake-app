@@ -36,7 +36,7 @@ class UserController extends Controller
         
 
         $is_calendar = Calendar::where('carender_link', $user_permalink)->exists();
-        // 一致するパーマリンクが存在しない場合、エラーメッセージを表示
+        
         if (!$is_calendar) {
             $request->session()->flash('message','カレンダーが存在しません。リンクを修正してください');
             return Inertia::render('UserLink');
