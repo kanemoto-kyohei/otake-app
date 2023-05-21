@@ -35,7 +35,6 @@ class UserController extends Controller
         $user_permalink = $request->getlink();
         
 
-        // パーマリンクが一致するレコードを取得
         $is_calendar = Calendar::where('carender_link', $user_permalink)->exists();
         // 一致するパーマリンクが存在しない場合、エラーメッセージを表示
         if (!$is_calendar) {
