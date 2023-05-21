@@ -13,6 +13,7 @@ class AppointService
   
     public function getCarender(){
 
+    //このカレンダー生成のための変数処理部分をサービスコンテナに移行できそう
     $currentWeek = isset($_GET['week']) ? (int)$_GET['week'] : date('W');
     $currentYear = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
   
