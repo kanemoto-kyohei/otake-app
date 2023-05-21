@@ -31,12 +31,11 @@ class UserController extends Controller
 
     public function linkconfirm(LinkConfirmRequest $request)
     {
-        //
         $user_permalink = $request->getlink();
         
 
         $is_calendar = Calendar::where('carender_link', $user_permalink)->exists();
-        
+
         if (!$is_calendar) {
             $request->session()->flash('message','カレンダーが存在しません。リンクを修正してください');
             return Inertia::render('UserLink');
