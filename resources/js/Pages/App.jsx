@@ -17,22 +17,29 @@ const App = () => {
     return (
     
         <AuthenticatedLayout user={auth.user}>
-            {isDesktop && <CalendarTitle carender_elements={carender_elements} />}
+            {isDesktop && (
+            <>
+            <CalendarTitle carender_elements={carender_elements} />
+            <CalendarTable carender_elements={carender_elements}
+            ></CalendarTable>
+            </>
+            ) }
 
-            {isDesktop && <CalendarTable
-                carender_elements={carender_elements}
-            ></CalendarTable> }
+            {isTablet && (
+            <div style={{ maxWidth: '768px', margin: '0 auto' }}>
+            <CalendarTitle carender_elements={carender_elements} />
+            <CalendarTable carender_elements={carender_elements}
+            ></CalendarTable>
+            </div>
+            ) }
 
-            {isTablet && <CalendarTitle carender_elements={carender_elements} />}
-
-            {isTablet && <CalendarTable
-                carender_elements={carender_elements}
-            ></CalendarTable> }
-            {isMobile && <CalendarTitle carender_elements={carender_elements} />}
-
-            {isMobile && <CalendarTable
-                carender_elements={carender_elements}
-            ></CalendarTable> }
+            {isMobile && (
+            <div style={{ maxWidth: '480px', margin: '0 auto' }}>
+            <CalendarTitle carender_elements={carender_elements} />
+            <CalendarTable carender_elements={carender_elements}
+            ></CalendarTable>
+            </div>
+            ) }
 
             {flash.error && (
                 <div className="text-center">
