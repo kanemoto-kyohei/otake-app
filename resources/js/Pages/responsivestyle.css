@@ -1,0 +1,12 @@
+/* PC用スタイル */
+.tablet-layout {
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+  
+  /* スマートフォン用スタイル */
+  .mobile-layout {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+  

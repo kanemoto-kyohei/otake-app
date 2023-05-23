@@ -3,43 +3,26 @@ import CalendarTitle from "@/Pages/CalendarTitle";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import CalendarTable from "@/Pages/CalendarTable";
 import AppoDisplay from "@/Pages/AppoDisplay";
-import { useMediaQuery } from "react-responsive";
 import React from "react";
+import "./responsivestyle.css";
 
 
 const App = () => {
     const { carender_elements, auth, appointments, userId, flash } =
         usePage().props;
-    const isDesktop = useMediaQuery({ query: '(minWidth: 1224px)' });
-    const isTablet = useMediaQuery({ query: '(minWidth: 769, maxWidth: 1024)' });
-    const isMobile = useMediaQuery({ query: '(maxWidth: 768)' });
-
+        const isTablet = window.matchMedia("(min-width: 769px) and (max-width: 1024px)").matches;
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      
     return (
     
         <AuthenticatedLayout user={auth.user}>
-            {isDesktop && (
-            <>
+            <div className={`${isTablet ? "tablet-layout" : ""}${isMobile ? "mobile-layout" : ""}`}>
             <CalendarTitle carender_elements={carender_elements} />
             <CalendarTable carender_elements={carender_elements}
             ></CalendarTable>
-            </>
-            ) }
+            </div>
+            
 
-            {isTablet && (
-            <>
-            <CalendarTitle carender_elements={carender_elements} />
-            <CalendarTable carender_elements={carender_elements}
-            ></CalendarTable>
-            </>
-            ) }
-
-            {isMobile && (
-            <>
-            <CalendarTitle carender_elements={carender_elements} />
-            <CalendarTable carender_elements={carender_elements}
-            ></CalendarTable>
-            </>
-            ) }
 
             {flash.error && (
                 <div className="text-center">
