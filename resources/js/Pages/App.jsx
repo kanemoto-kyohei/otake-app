@@ -13,6 +13,7 @@ const App = () => {
         const isTablet = window.matchMedia("(min-width: 1024px) and (max-width: 2800px)").matches;
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
       console.log(isMobile);
+      console.log(isTablet);
     return (
     
         <AuthenticatedLayout user={auth.user}>

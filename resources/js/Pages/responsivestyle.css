@@ -2,13 +2,13 @@
 .tablet-layout {
     max-width: 1024px;
     margin: 0 auto;
-    background-image: url('tablet-background.jpg');
   }
   
   /* スマートフォン用スタイル */
   .mobile-layout {
-    max-width: 768px;
+    max-width: 460px;
     margin: 0 auto;
-    color: red;
+    font-size: x-small;
+    overflow-x: scroll;
   }
   
