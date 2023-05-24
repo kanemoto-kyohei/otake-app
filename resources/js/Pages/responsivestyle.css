@@ -11,4 +11,9 @@
     font-size: x-small;
     overflow-x: scroll;
   }
+
+  .moble-col th,
+  .moble-col td{
+    width: 20px;
+  }
   

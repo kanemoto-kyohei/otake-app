@@ -1,6 +1,7 @@
 import { useTable } from "react-table";
 import moment from "moment";
 import CalendarCell from "@/Pages/CalendarCell";
+import "./responsivestyle.css";
 
 const CalendarTable = (props) => {
     const { carender_elements } = props;
@@ -8,6 +9,8 @@ const CalendarTable = (props) => {
     const weekdays = carender_elements.japaneseWeekdays;
     const datesOfWeek = carender_elements.datesOfWeek;
     const times = carender_elements.times;
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
     const columns = [
         { Header: "日時", accessor: "time" },
@@ -91,6 +94,7 @@ const CalendarTable = (props) => {
     }
     return (
         <div className="flex justify-center items-center">
+            <div className={`${isMobile ? "mobile-col" : ""}`}>
             <Table columns={columns} data={data} />
             <style>
                 {`
@@ -105,6 +109,7 @@ const CalendarTable = (props) => {
         }
         `}
             </style>
+            </div>
         </div>
     );
 };
