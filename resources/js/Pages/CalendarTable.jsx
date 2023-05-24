@@ -11,7 +11,8 @@ const CalendarTable = (props) => {
     const times = carender_elements.times;
 
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
+    console.log(isMobile);
+    
     const columns = [
         { Header: "日時", accessor: "time" },
         ...datesOfWeek.map((date) => {
