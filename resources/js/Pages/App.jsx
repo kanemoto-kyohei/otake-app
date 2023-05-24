@@ -10,9 +10,9 @@ import "./responsivestyle.css";
 const App = () => {
     const { carender_elements, auth, appointments, userId, flash } =
         usePage().props;
-        const isTablet = window.matchMedia("(min-width: 769px) and (max-width: 1024px)").matches;
+        const isTablet = window.matchMedia("(min-width: 1024px) and (max-width: 2800px)").matches;
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
-      
+      console.log(isMobile);
     return (
     
         <AuthenticatedLayout user={auth.user}>
