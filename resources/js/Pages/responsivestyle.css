@@ -14,9 +14,8 @@
   .moble-col th,
   .moble-col td{
     width: auto;
-    border: 1px solid blueviolet;
+    border: 1px solid black;
     padding: 0.5rem;
-    color: blue;
   }
 
   .mobile-right{
