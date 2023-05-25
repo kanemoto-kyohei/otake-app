@@ -11,8 +11,8 @@
   }
 
 
-  .moble-col th,
-  .moble-col td{
+  .mobile-col th,
+  .mobile-col td{
     width: auto;
     border: 1px solid black;
     padding: 0.5rem;
