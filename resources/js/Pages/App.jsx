@@ -15,8 +15,7 @@ const App = () => {
       console.log(isMobile);
       console.log(isTablet);
     return (
-    
-        <AuthenticatedLayout user={auth.user}>
+        <>
             <div className={`${isTablet ? "tablet-layout" : ""}${isMobile ? "mobile-layout" : ""}`}>
             <CalendarTitle carender_elements={carender_elements} />
             <CalendarTable carender_elements={carender_elements}
@@ -33,8 +32,7 @@ const App = () => {
         
 
             <AppoDisplay appointments={appointments} userId={userId} />
-        </AuthenticatedLayout>
-    
+        </>    
     );
 };
 export default App;

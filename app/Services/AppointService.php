@@ -11,8 +11,7 @@ class AppointService
 {
 
   
-    public function getCarender(){
-
+    public function getCarender($permalink){
 
     $currentWeek = isset($_GET['week']) ? (int)$_GET['week'] : date('W');
     $currentYear = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
@@ -49,8 +48,7 @@ class AppointService
     //管理者がやろうとするとここで自分のカレンダーが表示されてしまう
     $calendar = Calendar::where('user_id',$userId)->first();
     if(!$calendar){
-      $appoint = Appoint::where('user_id',$userId)->latest()->first();
-      $calendar = Calendar::where('carender_link',$appoint->carender_link)->first();
+      $calendar = Calendar::where('carender_link',$permalink)->first();
     }
     //nullだった場合にエラーメッセージを出したい
     $times = [];

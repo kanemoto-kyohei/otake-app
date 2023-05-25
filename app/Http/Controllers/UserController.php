@@ -55,23 +55,23 @@ class UserController extends Controller
 
 
 
-    public function index(Request $request, AppointService $appointService,$user_permalink)
+    public function index(Request $request, AppointService $appointService,$permalink)
     {
       $today = Carbon::today();
       $pastappointments = Appoint::wheredate('date','<',$today)->get();
       foreach($pastappointments as $pastappointment){
         $pastappointment->delete();
       }
-      $appointments = Appoint::where('carender_link', $user_permalink)->get();
+      $appointments = Appoint::where('carender_link', $permalink)->get();
       //データベースからdateとtimeのペアを取得して配列に代入
-      $carender_elements = $appointService->getCarender();
+      $carender_elements = $appointService->getCarender($permalink);
       $userId = Auth::id(); // 現在の認証済みユーザーのIDを取得
 
 
       //index.blade.phpで使っている変数の値は全部飛ばしてあげる
       return Inertia::render('App',[
         'carender_elements' => $carender_elements,
-        'user_permalink' => $user_permalink,
+        'user_permalink' => $permalink,
         'userId' => $userId,
         'appointments' => $appointments,
 

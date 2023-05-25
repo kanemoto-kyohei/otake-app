@@ -27,7 +27,7 @@ Route::get('appoint/inertia/users', [App\Http\Controllers\UserController::class,
 Route::post('appoint/inertia/users/linkconfirm', [App\Http\Controllers\UserController::class, 'linkconfirm'])
 ->name('appoint.inertiaLinkconfirm');
 
-Route::get('appoint/inertia/users/index/{user_permalink}', [App\Http\Controllers\UserController::class, 'index'])
+Route::get('appoint/inertia/users/index/{permalink}', [App\Http\Controllers\UserController::class, 'index'])
 ->name('appoint.inertiaIndex');
 
 Route::post('appoint/inertia/users/index/confirm', [App\Http\Controllers\UserController::class, 'confirm'])

@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/appoint/inertia/top';
+    public const HOME = 'appoint/inertia/admins';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

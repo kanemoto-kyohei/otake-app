@@ -22,7 +22,6 @@ const AppointConfirm = () => {
 
     return (
         <>
-            <AuthenticatedLayout user={auth.user}>
                 <form onSubmit={hundldeSubmit}>
                     <div className="mt-5 flex flex-col items-center">
                         <h1>以下の内容で予約を確定しますか？</h1>
@@ -35,7 +34,6 @@ const AppointConfirm = () => {
                         </div>
                     </div>
                 </form>
-            </AuthenticatedLayout>
         </>
     );
 };
