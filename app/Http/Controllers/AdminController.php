@@ -101,7 +101,7 @@ public function adminindex(Request $request, AppointService $appointService,$per
 
     $carender_elements = $appointService->getCarender($permalink);
 
-    $calendarLink = url('http://localhost:81/appoint/inertia/users/index/'.$permalink);
+    $calendarLink = url('https://otake-app.herokuapp.com/appoint/inertia/users/index/'.$permalink);
     return Inertia::render('AdminApp',[
         'carender_elements'=> $carender_elements,
         'appointments'=>$appointments,
