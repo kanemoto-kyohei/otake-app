@@ -1,9 +1,3 @@
-/* PC用スタイル */
-.tablet-layout {
-    max-width: 1024px;
-    margin: 0 auto;
-  }
-  
   /* スマートフォン用スタイル */
   .mobile-layout {
     max-width: 460px;
@@ -12,9 +6,52 @@
     overflow-x: scroll;
   }
 
+  .mobile-col table{
+    border-collapse: collapse;
+  }
+
+
   .moble-col th,
   .moble-col td{
-    width: 10px;
+    width: auto;
+    border: 1px solid blueviolet;
+    padding: 0.5rem;
     color: blue;
   }
+
+  .mobile-right{
+    padding-right: 9rem;
+  }
   
+  .mobile-left{
+    padding-left: 9rem;
+  }
+
+  /* PC用スタイル */
+.tablet-layout {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+
+  .tablet-col table{
+    border-collapse: collapse;
+  }
+
+
+  .tablet-col th,
+  .tablet-col td{
+    width: auto;
+    border: 1px solid black;
+    padding: 0.5rem;
+    
+  }
+
+  .tablet-right{
+    padding-right: 12.5rem;
+  }
+  
+  .tablet-left{
+    padding-left: 12.5rem;
+  }
+

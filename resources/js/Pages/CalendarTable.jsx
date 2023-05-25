@@ -10,6 +10,7 @@ const CalendarTable = (props) => {
     const datesOfWeek = carender_elements.datesOfWeek;
     const times = carender_elements.times;
 
+    const isTablet = window.matchMedia("(min-width: 1024px) and (max-width: 2800px)").matches;
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
     console.log(isMobile);
     
@@ -95,21 +96,8 @@ const CalendarTable = (props) => {
     }
     return (
         <div className="flex justify-center items-center">
-            <div className={`${isMobile ? "mobile-col" : ""}`}>
+            <div className={`${isTablet ? "tablet-col" : ""}${isMobile ? "mobile-col" : ""}`}>
             <Table columns={columns} data={data} />
-            <style>
-                {`
-        table {
-          border-collapse: collapse;
-        }
-        
-        th,
-        td {
-          border: 1px solid black;
-          padding: 0.5rem;
-        }
-        `}
-            </style>
             </div>
         </div>
     );
