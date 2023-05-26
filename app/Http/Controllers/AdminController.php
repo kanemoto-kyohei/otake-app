@@ -13,16 +13,20 @@ use App\Services\AppointService;
 class AdminController extends Controller
 {
     //
-    public function adminlink(Request $request){
+    public function adminlink(Request $request)
+    {
+        //
         $userId = Auth::id();
-        $is_appoint = Appoint::where('user_id',$userId)->exists();
-        if($is_appoint){
-            $request->session()->flash('link','一つのアカウントにつきどちらかしか選べないのでご注意ください');
-            return Inertia::render('Top');
+        $is_calendar = Calendar::where('user_id',$userId)->exists();
+        if(!$is_calendar){
+            return Inertia::render('AdminLink');
         }else{
-        return Inertia::render('AdminLink');
+            $calendar = Calendar::where('user_id',$userId)->firstOrFail();
+            return redirect()
+            ->route('admin.inertiaIndex',['permalink' => $calendar->carender_link]);
         }
-    }
+}
+
 
     public function linkset(Request $request)
     {
@@ -92,8 +96,7 @@ return redirect()
 public function adminindex(Request $request, AppointService $appointService,$permalink)
 {
     //
-    $appointments = Appoint::with('user')
-            ->where('carender_link',$permalink)
+    $appointments = Appoint::where('carender_link',$permalink)
             ->whereNotNull('date')
             ->whereNotNull('time')
             ->get();
@@ -101,7 +104,8 @@ public function adminindex(Request $request, AppointService $appointService,$per
 
     $carender_elements = $appointService->getCarender($permalink);
 
-    $calendarLink = url('https://otake-app.herokuapp.com/appoint/inertia/users/index/'.$permalink);
+    $calendarLink = url('http://localhost:81/appoint/inertia/users/index/'.$permalink);
+    
     return Inertia::render('AdminApp',[
         'carender_elements'=> $carender_elements,
         'appointments'=>$appointments,

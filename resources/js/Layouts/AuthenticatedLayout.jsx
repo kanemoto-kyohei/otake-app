@@ -18,13 +18,13 @@ export default function Authenticated({ user, header, children }) {
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
-                                <Link href={route('top')}>
+                                <Link href={route('admin.inertialink')}>
                                     <ApplicationLogo2 className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('top')} active={route().current('dashboard')}>
+                                <NavLink href={route('admin.inertialink')} active={route().current('dashboard')}>
                                     <FontAwesomeIcon icon={faHome} className = "w-5 h-5 mr-5"></FontAwesomeIcon>
                                 </NavLink>
                             </div>

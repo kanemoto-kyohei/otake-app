@@ -65,42 +65,42 @@ class UserController extends Controller
       $appointments = Appoint::where('carender_link', $permalink)->get();
       //データベースからdateとtimeのペアを取得して配列に代入
       $carender_elements = $appointService->getCarender($permalink);
-      $userId = Auth::id(); // 現在の認証済みユーザーのIDを取得
 
 
       //index.blade.phpで使っている変数の値は全部飛ばしてあげる
       return Inertia::render('App',[
         'carender_elements' => $carender_elements,
-        'user_permalink' => $permalink,
-        'userId' => $userId,
+        'permalink' => $permalink,
         'appointments' => $appointments,
 
       ]);
 
     }
 
-    public function confirm(Request $request)
+    public function confirm(Request $request,$permalink)
     {
         $selectedDateTime = $request->input('selected_date_time');
         list($date, $time) = explode('|', $selectedDateTime);
         return Inertia::render('AppointConfirm',[
                 'date'=>$date,
                 'time'=>$time,
+                'permalink'=>$permalink,
         ]
         );
     }
 
-    public function set(Request $request)
+    public function set(Request $request,$permalink)
     {
         //
-        $userId = Auth::id();
 
-        $appointdata = Appoint::where('user_id',$userId)->latest()->first();
-        $carender_link = $appointdata->carender_link;
 
         $appoint = new Appoint;
-        $appoint->user_id = $userId;       
-        $appoint->carender_link = $carender_link;
+
+        $appoint->name = $request->input('name');
+        $appoint->email = $request->input('email');
+        $appoint->extra = $request->input('extra');
+        $appoint->carender_link = $permalink;
+        
         $selectedDateTime = $request->input('selected_date_time');
         list($date, $time) = explode('|', $selectedDateTime);
     
@@ -108,11 +108,10 @@ class UserController extends Controller
         $appoint->time = $time;
 
         //ここですでにテーブルに既存の予約がないかチェック
-        $already_exists = Appoint::where('carender_link',$carender_link)
+        $already_exists = Appoint::where('carender_link',$permalink)
         ->where('date',$appoint->date)
         ->where('time',$appoint->time)
         ->exists();
-
         if(!$already_exists){
         $appoint->save();
         event(new AppointCreated($appoint));
@@ -120,18 +119,18 @@ class UserController extends Controller
         return Inertia::render('Done',[
             'date'=> $date,
             'time'=> $time,
-            'user_permalink'=> $carender_link,
+            'permalink'=> $permalink,
 
         ]);
         }else{
             $request->session()->flash('error','選択された日時はすでに他のユーザによって予約されています');
             return redirect()
-            ->route('appoint.inertiaIndex', ['user_permalink'=>$carender_link]);
+            ->route('appoint.inertiaIndex', ['permalink'=>$permalink]);
         }
 
     }
 
-    public function deleteconf(Request $request)
+    public function deleteconf(Request $request,$permalink)
     {
         //
         $appointDateTime = $request->input('selected_date_time');
@@ -140,13 +139,14 @@ class UserController extends Controller
             'date'=>$date,
             'time'=>$time,
             'id'=>$id,
+            'permalink'=>$permalink
 
         ]);
            
 
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request,$permalink)
     {
         //
         $appointId = $request->input('selected_id');
@@ -157,9 +157,29 @@ class UserController extends Controller
         $message = $request->session()->get('message');
         return redirect()
         ->route('appoint.inertiaIndex',
-        ['user_permalink'=>$user_permalink]);
+        ['permalink'=>$permalink]);
     
     }
+
+    public function filter(Request $request, $permalink)
+    {
+        //
+        $user_name = $request->input('name');
+        $user_email = $request->input('email');
+        
+        //ここですでにテーブルに既存の予約がないかチェック
+        $user_appointments = Appoint::where('carender_link',$permalink)
+        ->where('name',$user_name)
+        ->where('email',$user_email)
+        ->get();
+
+
+        return Inertia::render('AppoDisplay',[
+            'user_appointments'=> $user_appointments,
+            'permalink'=> $permalink,
+        ]);
+    }
+
 
 
 

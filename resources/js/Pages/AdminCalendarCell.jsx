@@ -81,9 +81,11 @@ const AdminCalendarCell = (props) => {
                         予約者
                     </h1>
                     <h1 className="text-center mt-2">
-                        {appointment.user.name}
+                        {appointment.name}
                     </h1>
-                    <p className="text-center mb-4">{appointment.user.email}</p>
+                    <p className="text-center mb-4">{appointment.email}</p>
+                    <p className="text-center mb-4">{appointment.extra}</p>
+
                     <h1
                         className="text-center"
                         style={{
@@ -121,7 +123,7 @@ const AdminCalendarCell = (props) => {
                             }}
                             onClick={hundleModalOpen}
                         >
-                            {appointment.user.name}
+                            {appointment.name}
                         </button>
                         {showModal && (
                             <Modal show={true} onClose={hundleModalClose}>

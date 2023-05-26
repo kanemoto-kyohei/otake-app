@@ -15,15 +15,15 @@ class AppointNotification extends Mailable
     use Queueable, SerializesModels;
 
     public $appoint;
-    public $appoint_info;
+    public $appoint_user;
     /**
      * Create a new message instance.
      */
-    public function __construct(Appoint $appoint,$appoint_info)
+    public function __construct(Appoint $appoint,$appoint_user)
     {
         //
         $this->appoint = $appoint;
-        $this->appoint_info = $appoint_info;
+        $this->appoint_user = $appoint_user;
 
     }
 
@@ -45,7 +45,7 @@ class AppointNotification extends Mailable
         return new Content(
             markdown: 'emails.orders.shipped',
             with:[
-                'appoint_info' => $this->appoint_info,
+                'appoint_info' => $this->appoint_user,
             ],
         );
     }

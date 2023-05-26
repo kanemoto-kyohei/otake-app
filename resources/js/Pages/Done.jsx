@@ -1,23 +1,24 @@
 import { usePage, useForm } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import GuestLayout from "@/Layouts/GuestLayout";
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
 import { Inertia } from "@inertiajs/inertia";
 
 const Done = () => {
-    const { date, time, user_permalink, auth } = usePage().props;
+    const { date, time, permalink, auth } = usePage().props;
     dayjs.locale("ja");
     const appodate = dayjs(date).format("M月D日 (ddd)");
+    
     const hundleGoback = () => {
-        Inertia.visit(route("appoint.inertiaIndex", { user_permalink }), {
+        Inertia.visit(route("appoint.inertiaIndex", { permalink }), {
             preserveState: true,
         });
     };
 
     return (
         <>
-            <AuthenticatedLayout user={auth.user}>
+            <GuestLayout>
                 <div className="mt-5 flex flex-col items-center">
                     <h1 style={{ color: "green" }}>
                         以下の内容で予約を確定しました
@@ -30,7 +31,7 @@ const Done = () => {
                         </PrimaryButton>
                     </div>
                 </div>
-            </AuthenticatedLayout>
+            </GuestLayout>
         </>
     );
 };

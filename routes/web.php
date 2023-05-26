@@ -30,22 +30,27 @@ Route::post('appoint/inertia/users/linkconfirm', [App\Http\Controllers\UserContr
 Route::get('appoint/inertia/users/index/{permalink}', [App\Http\Controllers\UserController::class, 'index'])
 ->name('appoint.inertiaIndex');
 
-Route::post('appoint/inertia/users/index/confirm', [App\Http\Controllers\UserController::class, 'confirm'])
+Route::post('appoint/inertia/users/index/confirm/{permalink}', [App\Http\Controllers\UserController::class, 'confirm'])
 ->name('appoint.inertiaConfirm');
 
-Route::post('appoint/inertia/users/index/set', [App\Http\Controllers\UserController::class, 'set'])
+Route::post('appoint/inertia/users/index/set/{permalink}', [App\Http\Controllers\UserController::class, 'set'])
 ->name('appoint.inertiaSet');
 
-Route::post('appoint/inertia/users/index/deleteconf', [App\Http\Controllers\UserController::class, 'deleteconf'])
+Route::post('appoint/inertia/users/index/deleteconf/{permalink}', [App\Http\Controllers\UserController::class, 'deleteconf'])
 ->name('appoint.inertiaDeleteconf');
 
-Route::post('appoint/inertia/users/index/delete', [App\Http\Controllers\UserController::class, 'delete'])
+Route::post('appoint/inertia/users/index/delete/{permalink}', [App\Http\Controllers\UserController::class, 'delete'])
 ->name('appoint.inertiaDelete');
+
+Route::post('appoint/inertia/users/index/filter/{permalink}', [App\Http\Controllers\UserController::class, 'filter'])
+->name('appoint.inertiaFilterAppoint');
+
 
 
 
 //admin
-Route::get('appoint/inertia/admins', [App\Http\Controllers\AdminController::class, 'adminlink']);
+Route::get('appoint/inertia/admins', [App\Http\Controllers\AdminController::class, 'adminlink'])
+->name('admin.inertialink');
 
 Route::post('appoint/inertia/linkset', [App\Http\Controllers\AdminController::class, 'linkset'])
 ->name('admin.inertiaLink');
