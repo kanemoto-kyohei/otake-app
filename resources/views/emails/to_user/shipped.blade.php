@@ -5,10 +5,7 @@
 <h2>予約日時</h2>
 <p>{{$appoint_user->date}}<br>{{$appoint_user->time}}</p>
 
-<x-mail::button :url="route('appoint.top')">
-カレンダーを見にいく
-</x-mail::button>
 
-Thanks,<br>
+ご利用いただきありがとうございます<br>
 {{ config('app.name') }}
 </x-mail::message>
