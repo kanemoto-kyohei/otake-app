@@ -78,20 +78,20 @@ public function save(Request $request)
     for($time = $start_time;$time<$end_time;$time+=$time_interval){
         $time_slots[] = sprintf('%02d:%02d',floor($time),($time*60)%60);
     }
-}
+    }
 
 
-$calendar->update([
+    $calendar->update([
     'time_slots'=>json_encode($time_slots),
     'weekday_slots'=>json_encode($weekday_slots),
     'is_holiday' => $holiday_setting,
-]);
-return redirect()
-->route('admin.inertiaIndex',['permalink'=>$permalink]);
+    ]);
+    return redirect()
+    ->route('admin.inertiaIndex',['permalink'=>$permalink]);
 
 
 
-}
+    }   
 
 public function adminindex(Request $request, AppointService $appointService,$permalink)
 {

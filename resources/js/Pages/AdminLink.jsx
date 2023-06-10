@@ -32,7 +32,7 @@ const AdminLink = () => {
             <form onSubmit={submit}>
                 <div className="flex justify-center">
                     <InputLabel
-                        class="mb-2"
+                        className="mb-2"
                         htmlFor="permalink"
                         value="リンク"
                     />
