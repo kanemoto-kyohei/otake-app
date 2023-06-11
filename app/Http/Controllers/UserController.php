@@ -114,8 +114,7 @@ class UserController extends Controller
         ->exists();
         if(!$already_exists){
         $appoint->save();
-        event(new AppointCreated($appoint));
-
+        //メールは一旦なしで
         return Inertia::render('Done',[
             'date'=> $date,
             'time'=> $time,
