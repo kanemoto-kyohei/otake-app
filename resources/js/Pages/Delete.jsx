@@ -17,7 +17,7 @@ const Delete = () => {
     const hundldeSubmit = (e) => {
         e.preventDefault();
         setData("selected_id", `${id}`);
-        post(route("appoint.inertiaDelete",{permalink}));
+        post(route("appoint.inertiaDelete", { permalink }));
     };
 
     return (

@@ -8,6 +8,7 @@ use App\Models\Calendar;
 use App\Models\Appoint;
 use Illuminate\Support\Facades\Auth; 
 use App\Services\AppointService;
+use Illuminate\Support\Facades\Hash;
 
 
 class AdminController extends Controller
@@ -31,63 +32,48 @@ class AdminController extends Controller
     public function linkset(Request $request)
     {
         //
-        $admin_link = $request->input('permalink');
-        $calendar = Calendar::where('carender_link',$admin_link)->first();
-        $userId = Auth::id(); 
-                       
-        if(!$calendar){        
             $calendar = new Calendar;
-            $calendar->carender_link = $request->input('permalink');
+            $calendar->carender_link = Hash::make($request->input('permalink'));
             $userId = Auth::id(); 
             $calendar->user_id = $userId;                        
             $calendar->save();
-            return Inertia::render('Setting',[
-                'permalink'=>$calendar->carender_link
-            ]);
-        }elseif($calendar->user_id == $userId ){
-            return redirect()
-            ->route('admin.inertiaIndex',['permalink' => $calendar->carender_link]);
-        }else{
-            $request->session()->flash('error','入力されたリンクはすでに別の管理者によって使用されています');
-            return Inertia::render('AdminLink');
+            return Inertia::render('Setting');
+        }
 
-}
-}
-
-public function save(Request $request)
-{
+        public function save(Request $request)
+        {
     //
-    $userId = Auth::id();
-    $calendar = Calendar::where('user_id',$userId)->firstOrFail();
-    $permalink = $calendar->carender_link;
+        $userId = Auth::id();
+        $calendar = Calendar::where('user_id',$userId)->firstOrFail();
+        $permalink = $calendar->carender_link;
 
-    $start_time = $request->input('start_time');
-    $end_time = $request->input('end_time');
-    $time_interval = $request->input('time_interval');
-    $holiday_setting = $request->input('holiday_setting')?true:false;
-    $weekday_slots = $request->input('weekday_slots');
+        $start_time = $request->input('start_time');
+        $end_time = $request->input('end_time');
+        $time_interval = $request->input('time_interval');
+        $holiday_setting = $request->input('holiday_setting')?true:false;
+        $weekday_slots = $request->input('weekday_slots');
 
-    if($start_time >= $end_time){
+        if($start_time >= $end_time){
         $request->session()->flash('message','時間を正しく設定してください');
         return Inertia::render('Setting');
-    }elseif(fmod(($end_time - $start_time), $time_interval) != 0){
+        }elseif(fmod(($end_time - $start_time), $time_interval) != 0){
         $request->session()->flash('message','時間を正しく設定してください');
         return Inertia::render('Setting');
-    }else{
-    $time_slots = [];
-    for($time = $start_time;$time<$end_time;$time+=$time_interval){
+        }else{
+        $time_slots = [];
+        for($time = $start_time;$time<$end_time;$time+=$time_interval){
         $time_slots[] = sprintf('%02d:%02d',floor($time),($time*60)%60);
-    }
-    }
+        }
+        }
 
 
-    $calendar->update([
-    'time_slots'=>json_encode($time_slots),
-    'weekday_slots'=>json_encode($weekday_slots),
-    'is_holiday' => $holiday_setting,
-    ]);
-    return redirect()
-    ->route('admin.inertiaIndex',['permalink'=>$permalink]);
+        $calendar->update([
+        'time_slots'=>json_encode($time_slots),
+        'weekday_slots'=>json_encode($weekday_slots),
+        'is_holiday' => $holiday_setting,
+        ]);
+        return redirect()
+        ->route('admin.inertiaIndex',['permalink'=>$permalink]);
 
 
 

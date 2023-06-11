@@ -80,9 +80,7 @@ const AdminCalendarCell = (props) => {
                     >
                         予約者
                     </h1>
-                    <h1 className="text-center mt-2">
-                        {appointment.name}
-                    </h1>
+                    <h1 className="text-center mt-2">{appointment.name}</h1>
                     <p className="text-center mb-4">{appointment.email}</p>
                     <p className="text-center mb-4">{appointment.extra}</p>
 

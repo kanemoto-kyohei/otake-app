@@ -12,25 +12,29 @@ const AppoDisplay = () => {
 
     const list = () => {
         if (user_appointments && user_appointments.length > 0) {
-          return user_appointments.map((appointment, index) => (
-            <li key={index}>
-              {dayjs(appointment.date).format("M月D日 (ddd)")} : {appointment.time}
-              <CancelButton date={appointment.date} time={appointment.time} id={appointment.id} permalink={permalink} />
-            </li>
-          ));
+            return user_appointments.map((appointment, index) => (
+                <li key={index}>
+                    {dayjs(appointment.date).format("M月D日 (ddd)")} :{" "}
+                    {appointment.time}
+                    <CancelButton
+                        date={appointment.date}
+                        time={appointment.time}
+                        id={appointment.id}
+                        permalink={permalink}
+                    />
+                </li>
+            ));
         }
-
-    }
+    };
 
     return (
         <GuestLayout>
-        <h1 className="text-center">予約済み一覧</h1>
-        {flash.message && (
+            <h1 className="text-center">予約済み一覧</h1>
+            {flash.message && (
                 <div style={{ color: "green" }}>{flash.message}</div>
             )}
-        {list()}
+            {list()}
         </GuestLayout>
-      );
-      
+    );
 };
 export default AppoDisplay;

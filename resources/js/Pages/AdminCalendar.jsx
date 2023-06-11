@@ -4,7 +4,6 @@ import AdminCalendarCell from "@/Pages/AdminCalendarCell";
 import React from "react";
 import "./responsivestyle.css";
 
-
 const AdminCalendar = (props) => {
     const { carender_elements } = props;
 
@@ -12,7 +11,9 @@ const AdminCalendar = (props) => {
     const datesOfWeek = carender_elements.datesOfWeek;
     const times = carender_elements.times;
 
-    const isTablet = window.matchMedia("(min-width: 1024px) and (max-width: 2800px)").matches;
+    const isTablet = window.matchMedia(
+        "(min-width: 1024px) and (max-width: 2800px)"
+    ).matches;
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
     const columns = [
@@ -97,8 +98,12 @@ const AdminCalendar = (props) => {
     }
     return (
         <div className="flex justify-center items-center">
-            <div className={`${isTablet ? "tablet-col" : ""}${isMobile ? "mobile-col" : ""}`}>
-            <Table columns={columns} data={data} />
+            <div
+                className={`${isTablet ? "tablet-col" : ""}${
+                    isMobile ? "mobile-col" : ""
+                }`}
+            >
+                <Table columns={columns} data={data} />
             </div>
         </div>
     );

@@ -10,10 +10,12 @@ const CalendarTable = (props) => {
     const datesOfWeek = carender_elements.datesOfWeek;
     const times = carender_elements.times;
 
-    const isTablet = window.matchMedia("(min-width: 1024px) and (max-width: 2800px)").matches;
+    const isTablet = window.matchMedia(
+        "(min-width: 1024px) and (max-width: 2800px)"
+    ).matches;
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
     console.log(isMobile);
-    
+
     const columns = [
         { Header: "日時", accessor: "time" },
         ...datesOfWeek.map((date) => {
@@ -96,8 +98,12 @@ const CalendarTable = (props) => {
     }
     return (
         <div className="flex justify-center items-center">
-            <div className={`${isTablet ? "tablet-col" : ""}${isMobile ? "mobile-col" : ""}`}>
-            <Table columns={columns} data={data} />
+            <div
+                className={`${isTablet ? "tablet-col" : ""}${
+                    isMobile ? "mobile-col" : ""
+                }`}
+            >
+                <Table columns={columns} data={data} />
             </div>
         </div>
     );

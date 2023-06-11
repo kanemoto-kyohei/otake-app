@@ -81,57 +81,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-//以下top画面
-Route::get('appoint/top', function () {
-    return view('appoint.top');
-})->name('appoint.top');
-
-//ユーザ画面
-Route::post('/appoint', \App\Http\Controllers\Appoint\LinkController::class)
-->name('appoint.link');
-
-Route::post('/appoint/link', \App\Http\Controllers\Appoint\LinkConfirmController::class)
-->name('appoint.linkconfirm');
-
-Route::get('/appoint/{user_permalink}', \App\Http\Controllers\Appoint\IndexController::class)
-->name('appoint.index');
-
-Route::post('/appoint/confirm/{user_permalink}', \App\Http\Controllers\Appoint\ConfirmController::class)
-->name('confirm.index');
-
-Route::post('/appoint/set/{user_permalink}', \App\Http\Controllers\Appoint\SetController::class)
-->name('set.index');
-
-Route::post('/appoint/deleteconf/{user_permalink}/{appointId}', \App\Http\Controllers\Appoint\DeleteConfController::class)
-->name('deleteconf.index');
-
-Route::delete('/appoint/delete/{user_permalink}', \App\Http\Controllers\Appoint\DeleteController::class)
-->name('delete.index');
-
-
-//以下管理者のルート
-Route::post('/appoint/admin/link', function () {
-    return view('admin.link');
-})->name('admin.link');
-
-Route::post('/appoint/admin/linkset', \App\Http\Controllers\Admin\LinkSetController::class)
-->name('admin.linkset');
-
-Route::post('/appoint/admin/save/{permalink}', \App\Http\Controllers\Admin\SettingSaveController::class)
-->name('admin.save');
-
-Route::post('/appoint/admin/reset/{permalink}', \App\Http\Controllers\Admin\ResetController::class)
-->name('admin.reset');
-
-Route::get('/appoint/admin/{permalink}', \App\Http\Controllers\Admin\AdminIndexController::class)
-->name('admin.index');
-
-Route::get('/appoint/admin/dash/{permalink}', \App\Http\Controllers\Admin\AdminController::class)
-->name('admin.dashboard');
 
 //ログアウト
-});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -9,7 +9,7 @@ const Done = () => {
     const { date, time, permalink, auth } = usePage().props;
     dayjs.locale("ja");
     const appodate = dayjs(date).format("M月D日 (ddd)");
-    
+
     const hundleGoback = () => {
         Inertia.visit(route("appoint.inertiaIndex", { permalink }), {
             preserveState: true,

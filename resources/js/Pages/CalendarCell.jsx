@@ -1,19 +1,18 @@
-import { usePage,  Link } from "@inertiajs/react";
+import { usePage, Link } from "@inertiajs/react";
 import moment from "moment";
 import { Inertia } from "@inertiajs/inertia";
 import React from "react";
 
 const CalendarCell = (props) => {
-    const { date, time, columnNum  } = props;
+    const { date, time, columnNum } = props;
     const { appointments, carender_elements, permalink } = usePage().props;
-    
+
     const Myweekdays = carender_elements.weekdays;
     const holidays = carender_elements.holiday.map((holiday) =>
         moment(holiday, "M/D").format("M/D")
     );
     const currentDate = new Date();
     const currentDisplayDate = moment(currentDate).format("YYYY-MM-DD");
-
 
     const cell = () => {
         let result = false;
@@ -65,7 +64,7 @@ const CalendarCell = (props) => {
             return (
                 <Link
                     style={{ color: "green" }}
-                    href={route("appoint.inertiaConfirm",{permalink})}
+                    href={route("appoint.inertiaConfirm", { permalink })}
                     method="post"
                     data={{
                         selected_date_time: `${date}|${time}`,
@@ -75,9 +74,12 @@ const CalendarCell = (props) => {
                     preserveState={false}
                     onIonClick={(e) => {
                         e.preventDefault();
-                        Inertia.post(route("appoint.inertiaConfirm",{ permalink }), {
-                            selected_date_time: `${date}|${time}`,
-                        });
+                        Inertia.post(
+                            route("appoint.inertiaConfirm", { permalink }),
+                            {
+                                selected_date_time: `${date}|${time}`,
+                            }
+                        );
                     }}
                 >
                     ◎
@@ -86,9 +88,6 @@ const CalendarCell = (props) => {
         }
     };
 
-    return <div>
-            {contents()}
-           </div>
-    
+    return <div>{contents()}</div>;
 };
 export default CalendarCell;

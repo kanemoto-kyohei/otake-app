@@ -5,28 +5,27 @@ import AppoConfirmForm from "@/Pages/AppoConfirmForm";
 import PrimaryButton from "@/Components/PrimaryButton";
 
 const UserConfirmForm = () => {
+    const [showForm, setshowForm] = useState(false);
 
-
-const [showForm, setshowForm] = useState(false);
-
-const  handleClick =()=>{
-    setshowForm(true);
-};
-    return(
+    const handleClick = () => {
+        setshowForm(true);
+    };
+    return (
         <>
-        <div className="flex flex-col items-center">
-        {!showForm && 
-            <PrimaryButton className='mt-5' onClick={handleClick}>予約を確認する</PrimaryButton>
-        }
-        {showForm &&
-            <div className="mt-5">
-            <AppoConfirmForm />
+            <div className="flex flex-col items-center">
+                {!showForm && (
+                    <PrimaryButton className="mt-5" onClick={handleClick}>
+                        予約を確認する
+                    </PrimaryButton>
+                )}
+                {showForm && (
+                    <div className="mt-5">
+                        <AppoConfirmForm />
+                    </div>
+                )}
             </div>
-        }
-        </div>
         </>
-    )
-
-}
+    );
+};
 
 export default UserConfirmForm;

@@ -6,7 +6,7 @@ const CancelButton = (props) => {
     return (
         <Link
             style={{ color: "red", textDecoration: "underline" }}
-            href={route("appoint.inertiaDeleteconf",{permalink})}
+            href={route("appoint.inertiaDeleteconf", { permalink })}
             method="post"
             data={{
                 selected_date_time: `${date}|${time}|${id}`,
@@ -16,9 +16,12 @@ const CancelButton = (props) => {
             preserveState={false}
             onIonClick={(e) => {
                 e.preventDefault();
-                Inertia.post(route("appoint.inertiaDeleteconf",{permalink}), {
-                    selected_date_time: `${date}|${time}`,
-                });
+                Inertia.post(
+                    route("appoint.inertiaDeleteconf", { permalink }),
+                    {
+                        selected_date_time: `${date}|${time}`,
+                    }
+                );
             }}
         >
             キャンセルする

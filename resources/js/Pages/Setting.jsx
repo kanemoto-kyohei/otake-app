@@ -70,6 +70,7 @@ const Setting = () => {
 
             <form onSubmit={submit}>
                 <div className="flex flex-col items-center mt-6">
+                    <h1 className="mb-3">カレンダーの設定を入力してください</h1>
                     <p htmlFor="start_time">開始時間</p>
                     <div className="flex items-center">
                         <Select

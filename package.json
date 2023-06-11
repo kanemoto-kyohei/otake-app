@@ -27,12 +27,17 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@emotion/react": "^11.11.1",
+        "@emotion/styled": "^11.11.0",
         "@fortawesome/fontawesome-free": "^6.4.0",
         "@fortawesome/fontawesome-free-solid": "^5.0.13",
         "@fortawesome/react-fontawesome": "^0.2.0",
         "@inertiajs/inertia": "^0.11.1",
+        "@mui/icons-material": "^5.11.16",
+        "@mui/material": "^5.13.4",
         "dayjs": "^1.11.7",
         "moment": "^2.29.4",
+        "react-icons": "^4.9.0",
         "react-responsive": "^9.0.2",
         "react-select": "^5.7.3",
         "react-table": "^7.8.0"
